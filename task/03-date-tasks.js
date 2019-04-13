@@ -22,7 +22,8 @@
  *    'Sun, 17 May 1998 03:00:00 GMT+01' => Date()
  */
 function parseDataFromRfc2822(value) {
-   throw new Error('Not implemented');
+   var date = new Date(value);
+   return date;
 }
 
 /**
@@ -37,7 +38,8 @@ function parseDataFromRfc2822(value) {
  *    '2016-01-19T08:07:37Z' => Date()
  */
 function parseDataFromIso8601(value) {
-   throw new Error('Not implemented');
+   var date = new Date(value);
+   return date;
 }
 
 
@@ -56,7 +58,12 @@ function parseDataFromIso8601(value) {
  *    Date(2015,1,1)    => false
  */
 function isLeapYear(date) {
-   throw new Error('Not implemented');
+   var d = new Date(date);
+   var yr = d.getFullYear();
+ if ( yr%4!==0)  return false
+else if (yr%100!==0) return true
+else if (yr%400!==0) return false
+else return true;
 }
 
 
@@ -76,8 +83,36 @@ function isLeapYear(date) {
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
 function timeSpanToString(startDate, endDate) {
-   throw new Error('Not implemented');
-}
+   var start = new Date(startDate)
+   var end = new Date(endDate)
+   var ms = Math.floor(end.getTime()-start.getTime());
+   var miliiseconds = (parseInt((ms)%1000));
+   var seconds = Math.floor(parseInt((ms/1000)%60));
+    var minutes = parseInt((ms/(1000*60))%60);
+    var hours = parseInt((ms/(1000*60*60))%24);
+    miliiseconds=(miliiseconds==0) ? "000"  : miliiseconds;
+    hours = (hours < 10) ? "0" + hours : hours;
+    minutes = (minutes < 10) ? "0" + minutes : minutes;
+    seconds = (seconds < 10) ? "0" + seconds : seconds;
+   // var sec = Math.floor(ms/1000);
+   // var minutes = Math.floor(sec/60);
+   // var hours = Math.floor(minutes/60);
+   // ms = (ms< 1000)? ms:'000';
+   // if (sec==0||sec>=60)  sec='00' 
+   // else  if (sec>0&&sec<10)  sec='0'+sec
+   // else sec=sec;
+   // //sec = (sec< 60)? sec:'00';
+   // if (minutes==0||minutes>=60)  minutes='00' 
+   // else  if (minutes>0&&minutes<10)  minutes='0'+minutes
+   // else minutes=minutes;
+   // //hours = (hours< 60)? '0'+hours:'00';
+   // if (hours==0||hours>=60)  hours='00' 
+   // else  if (hours>0&&hours<10)  hours='0'+hours
+   // else hours=hours;
+
+   return hours + ':' + minutes + ':' + seconds + '.' + miliiseconds; 
+   }
+
 
 
 /**
@@ -94,7 +129,13 @@ function timeSpanToString(startDate, endDate) {
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
 function angleBetweenClockHands(date) {
-    throw new Error('Not implemented');
+   var data=new Date(date);
+    var hours = data.getHours()-3
+    if (hours>=12) hours=hours-12;
+    var minutes=data.getMinutes();
+    var deg = Math.abs(0.5*(60*hours-11*minutes));
+    if (deg>180) deg=360-deg;
+   return Math.PI*deg/180;
 }
 
 
