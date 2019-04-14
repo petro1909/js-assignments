@@ -184,17 +184,11 @@ function isInsideCircle(circle, point) {
  *   'entente' => null
  */
 function findFirstSingleChar(str) {
-    // var m=[]
-    // var n =str.length
-    // for (var i=0;i<n-1;i++){
-    //     for (var j=n-1; j=0;j--){
-    //          if(str[i]!=str[j])
-    //           m.push(str[i])
-    //     }
-    //     return m.toString();
-        
-    throw new Error('Not implemented');
-    // }
+    for (let i = 0; i < str.length; i++) {
+        if (str.indexOf(str[i]) === i && 
+            str.lastIndexOf(str[i]) === i)
+            return str[i];
+    }
 }
 
 
@@ -411,8 +405,34 @@ var bracketsConfig =['[]','{}','<>','()']
  *
  */
 function timespanToHumanString(startDate, endDate) {
-    throw new Error('Not implemented');
+    let range = endDate.getTime() - startDate.getTime();
+    let s = 1000;
+    let m = 60000;
+    let h = 3600000;
+    let d = 86400000;
+    if (range <= 45 * s)
+        return 'a few seconds ago';
+    if (range <= 90 * s)
+        return 'a minute ago';
+    if (range <= 45 * m)
+        return `${Math.round((range - 1) / m)} minutes ago`;
+    if (range <= 90 * m)
+        return 'an hour ago';
+    if (range <= 22 * h)
+        return `${Math.round((range - 1) / h)} hours ago`;
+    if (range <= 36 * h)
+        return 'a day ago';
+    if (range <= 25 * d)
+        return `${Math.round((range - 1) / d)} days ago`;
+    if (range <= 45 * d)
+        return 'a month ago';
+    if (range <= 345 * d)
+        return `${Math.round(range / 30 / d)} months ago`;
+    if (range <= 545 * d)
+        return 'a year ago';
+    return `${Math.round(range / 365 / d)} years ago`;
 }
+
 
 
 /**
@@ -475,7 +495,16 @@ function getCommonDirectoryPath(pathes) {
  *
  */
 function getMatrixProduct(m1, m2) {
-    throw new Error('Not implemented');
+    let result = [];
+    for (let i = 0; i < m1.length; i++) {
+        result[i] = [];
+        for (let j = 0; j < m2[i].length; j++) {
+            result[i][j] = 0;
+            for (let k = 0; k < m1[i].length; k++)
+                result[i][j] += m1[i][k] * m2[k][j];
+        }
+    }
+    return result;
 }
 
 
