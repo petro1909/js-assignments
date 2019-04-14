@@ -94,21 +94,6 @@ function timeSpanToString(startDate, endDate) {
     hours = (hours < 10) ? "0" + hours : hours;
     minutes = (minutes < 10) ? "0" + minutes : minutes;
     seconds = (seconds < 10) ? "0" + seconds : seconds;
-   // var sec = Math.floor(ms/1000);
-   // var minutes = Math.floor(sec/60);
-   // var hours = Math.floor(minutes/60);
-   // ms = (ms< 1000)? ms:'000';
-   // if (sec==0||sec>=60)  sec='00' 
-   // else  if (sec>0&&sec<10)  sec='0'+sec
-   // else sec=sec;
-   // //sec = (sec< 60)? sec:'00';
-   // if (minutes==0||minutes>=60)  minutes='00' 
-   // else  if (minutes>0&&minutes<10)  minutes='0'+minutes
-   // else minutes=minutes;
-   // //hours = (hours< 60)? '0'+hours:'00';
-   // if (hours==0||hours>=60)  hours='00' 
-   // else  if (hours>0&&hours<10)  hours='0'+hours
-   // else hours=hours;
 
    return hours + ':' + minutes + ':' + seconds + '.' + miliiseconds; 
    }
